@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maxMeal/category_item.dart';
 import 'dummy_data.dart';
 import 'model/category.dart';
 
@@ -7,28 +8,35 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: CircleAvatar(
+          child: Icon(Icons.add),
+        ),
+      ),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.settings),
+          ),
+        ],
+        title: Text("Modern Meal App"),
+      ),
       body: SafeArea(
         child: GridView(
           children: [
             ...DUMMY_CATEGORIES.map(
-              (Category category) => Container(
-                decoration: BoxDecoration(
-                  color: category.color,
-                ),
-                child: Text(
-                  category.title,
-                ),
+              (Category category) => CategoryItem(
+                color: category.color,
+                id: category.id,
+                title: category.title,
               ),
             ),
           ],
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 100,
-            childAspectRatio: 3 / 2,
+            maxCrossAxisExtent: 200,
+            childAspectRatio: 3 / 3.5,
             crossAxisSpacing: 20,
             mainAxisSpacing: 20,
-          ),
-          padding: EdgeInsets.only(
-            top: 100,
           ),
         ),
       ),
