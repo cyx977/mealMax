@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:maxMeal/categories_screen.dart';
+import 'package:maxMeal/category_meals-screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,12 +13,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.pink,
+        accentColor: Colors.amber,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(title: 'Modern Meal App'),
       routes: {
         CategoriesScreen.route: (context) => CategoriesScreen(),
+        CategoryMealsScreen.route: (context) => CategoryMealsScreen(),
       },
     );
   }

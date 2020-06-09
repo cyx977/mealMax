@@ -9,6 +9,7 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        onPressed: () {},
         child: CircleAvatar(
           child: Icon(Icons.add),
         ),
@@ -16,6 +17,7 @@ class CategoriesScreen extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
+            onPressed: () {},
             icon: Icon(Icons.settings),
           ),
         ],
@@ -23,6 +25,7 @@ class CategoriesScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: GridView(
+          padding: EdgeInsets.all(25.0),
           children: [
             ...DUMMY_CATEGORIES.map(
               (Category category) => CategoryItem(
@@ -34,9 +37,9 @@ class CategoriesScreen extends StatelessWidget {
           ],
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
-            childAspectRatio: 3 / 3.5,
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
+            childAspectRatio: 3 / 2,
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 20,
           ),
         ),
       ),

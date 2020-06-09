@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:maxMeal/category_meals-screen.dart';
 
 class CategoryItem extends StatelessWidget {
   final String title;
@@ -13,34 +14,35 @@ class CategoryItem extends StatelessWidget {
     this.color,
   });
 
+  _mealPage(BuildContext ctx) {
+    Navigator.pushNamed(
+      ctx,
+      CategoryMealsScreen.route,
+      arguments: {
+        'color': color,
+        'id': id,
+        'title': title,
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(2.0),
+    return InkWell(
+      onTap: () => _mealPage(context),
+      splashColor: Colors.black,
+      borderRadius: BorderRadius.circular(15),
       child: Container(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          children: [
-            Text(
-              title,
-              style: TextStyle(fontSize: 20),
-            ),
-            Expanded(
-              child: SizedBox(),
-            ),
-            RaisedButton(
-              color: Colors.lightBlueAccent.withOpacity(0.2),
-              onPressed: () {},
-              child: Text("Order Now"),
-            )
-          ],
+        padding: const EdgeInsets.all(15),
+        child: Text(
+          title,
+          style: TextStyle(fontSize: 20),
         ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(
-            Radius.circular(6.0),
-          ),
+          borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(
             begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
             colors: [
               color.withOpacity(0.6),
               color,
