@@ -20,7 +20,6 @@ class CategoryItem extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(10),
         child: Column(
-          
           children: [
             Text(
               title,
@@ -30,7 +29,6 @@ class CategoryItem extends StatelessWidget {
               child: SizedBox(),
             ),
             RaisedButton(
-              
               color: Colors.lightBlueAccent.withOpacity(0.2),
               onPressed: () {},
               child: Text("Order Now"),
@@ -38,9 +36,11 @@ class CategoryItem extends StatelessWidget {
           ],
         ),
         decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(6.0),
+          ),
           gradient: LinearGradient(
             begin: Alignment.topLeft,
-
             colors: [
               color.withOpacity(0.6),
               color,
