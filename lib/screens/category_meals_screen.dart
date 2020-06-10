@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:maxMeal/widgets/meal_item.dart';
-import './testscreen.dart';
 import '../dummy_data.dart';
 import '../model/meal.dart';
 
 class CategoryMealsScreen extends StatelessWidget {
   static final String route = "/category-meals";
-  // final String id;
-  // final String title;
-  // final Color color;
-
-  // CategoryMealsScreen({@required this.id, @required this.title, @required this.color});
-
+  
   @override
   Widget build(BuildContext context) {
     print("categoryMealsScreen build");
@@ -25,9 +19,7 @@ class CategoryMealsScreen extends StatelessWidget {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, TestScreen.route);
-        },
+        onPressed: () {},
         child: CircleAvatar(
           child: Icon(
             Icons.phone_in_talk,
@@ -40,9 +32,10 @@ class CategoryMealsScreen extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (context, index) {
           return MealItem(
+            id: catMealData[index].id,
             title: catMealData[index].title,
             url: catMealData[index].imageUrl,
-            affordability: catMealData[index].affordability.toString(),
+            affordability: catMealData[index].affordability,
             duration: catMealData[index].duration.toString(),
           );
         },

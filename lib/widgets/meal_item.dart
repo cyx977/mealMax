@@ -1,22 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:maxMeal/screens/meal_detail_screen.dart';
+import '../model/meal.dart';
 
 class MealItem extends StatelessWidget {
+  final String id;
   final String title;
   final String url;
-  final String affordability;
+  final Affordability affordability;
   final String duration;
+
+  String get printAffordability {
+    switch (affordability) {
+      case Affordability.Affordable:
+        {
+          return "Affordable";
+        }
+        break;
+      case Affordability.Pricey:
+        {
+          return "Pricey";
+        }
+        break;
+      case Affordability.Luxurious:
+        {
+          return "Luxurious";
+        }
+        break;
+      default:
+        {
+          return "NA";
+        }
+    }
+  }
 
   MealItem({
     @required this.url,
     @required this.affordability,
     @required this.duration,
     @required this.title,
+    @required this.id,
   });
-  void selectMeal() {}
+  void selectMeal(BuildContext context) {
+    Navigator.pushNamed(context, MealDetailScreen.route, arguments: id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: selectMeal,
+      onTap: () => selectMeal(context),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -48,7 +79,8 @@ class MealItem extends StatelessWidget {
                     color: Colors.black54,
                     width: 300,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 5),
                       child: Text(
                         title,
                         // softWrap: true,
@@ -73,14 +105,16 @@ class MealItem extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.timer),
+                      Icon(
+                        Icons.timer,
+                      ),
                       Text('$duration mins'),
                     ],
                   ),
                   Row(
                     children: [
                       Icon(Icons.attach_money),
-                      Text(affordability),
+                      Text(printAffordability),
                     ],
                   ),
                   Row(
