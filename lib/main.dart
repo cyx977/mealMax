@@ -27,7 +27,18 @@ class MyApp extends StatelessWidget {
         CategoryMealsScreen.route: (context) => CategoryMealsScreen(),
         MealDetailScreen.route: (context) => MealDetailScreen(),
       },
-      onGenerateRoute: (settings) {
+      onGenerateRoute: (RouteSettings settings) {
+        print("onGenerateRoute");
+        print(settings.name);
+        var generatedRouteArgs = settings.arguments;
+        print(generatedRouteArgs);
+        return MaterialPageRoute(
+          builder: (context) => ErrorPage(),
+        );
+      },
+      onUnknownRoute: (RouteSettings settings) {
+        //this is triggered when nothing works
+        print("onUnknownRoute");
         print(settings.name);
         var generatedRouteArgs = settings.arguments;
         print(generatedRouteArgs);
