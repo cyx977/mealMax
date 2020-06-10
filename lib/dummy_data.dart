@@ -408,10 +408,9 @@ const DUMMY_MEALS = const [
 ];
 
 List<Meal> categoryMeals(String categoryId) {
-  Iterable catMeals = DUMMY_MEALS.where((element) {
+  return DUMMY_MEALS.where((element) {
     return element.categories.contains(categoryId);
-  });
-  return catMeals.map(
+  }).map(
     (e) => Meal(
       affordability: e.affordability,
       categories: e.categories,
