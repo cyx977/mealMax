@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maxMeal/screens/error_screen.dart';
 import 'package:maxMeal/screens/meal_detail_screen.dart';
 import 'package:maxMeal/screens/my_homepage.dart';
 
@@ -25,6 +26,14 @@ class MyApp extends StatelessWidget {
         CategoriesScreen.route: (context) => CategoriesScreen(),
         CategoryMealsScreen.route: (context) => CategoryMealsScreen(),
         MealDetailScreen.route: (context) => MealDetailScreen(),
+      },
+      onGenerateRoute: (settings) {
+        print(settings.name);
+        var generatedRouteArgs = settings.arguments;
+        print(generatedRouteArgs);
+        return MaterialPageRoute(
+          builder: (context) => ErrorPage(),
+        );
       },
     );
   }

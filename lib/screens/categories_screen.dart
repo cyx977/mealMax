@@ -10,7 +10,9 @@ class CategoriesScreen extends StatelessWidget {
     print("CategoriesScreen build");
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, "thisRouteDoesntExist", arguments: "TestArgumentFromPushNamed");
+        },
         child: CircleAvatar(
           child: Icon(Icons.add),
         ),
