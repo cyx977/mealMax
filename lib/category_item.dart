@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:maxMeal/category_meals-screen.dart';
+import 'package:maxMeal/screen/category_meals-screen.dart';
 
 class CategoryItem extends StatelessWidget {
   final String title;
@@ -14,9 +14,9 @@ class CategoryItem extends StatelessWidget {
     this.color,
   });
 
-  _mealPage(BuildContext ctx) {
+  _mealPage(BuildContext context) {
     Navigator.pushNamed(
-      ctx,
+      context,
       CategoryMealsScreen.route,
       arguments: {
         'color': color,

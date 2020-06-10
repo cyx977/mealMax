@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:maxMeal/categories_screen.dart';
-import 'package:maxMeal/category_meals-screen.dart';
+import 'package:maxMeal/screen/my_homepage.dart';
+
+import 'package:maxMeal/screen/categories_screen.dart';
+import 'package:maxMeal/screen/category_meals-screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,8 +19,8 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.amber,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Modern Meal App'),
       routes: {
+        MyHomePage.route : (context) => MyHomePage(title: "Modern Meal App",),
         CategoriesScreen.route: (context) => CategoriesScreen(),
         CategoryMealsScreen.route: (context) => CategoryMealsScreen(),
       },
@@ -26,28 +28,4 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({this.title});
 
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Text(
-        'Navigation Time!',
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, CategoriesScreen.route),
-      ),
-    );
-  }
-}

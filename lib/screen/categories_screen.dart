@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:maxMeal/category_item.dart';
-import 'dummy_data.dart';
-import 'model/category.dart';
+import '../dummy_data.dart';
+import '../model/category.dart';
 
 class CategoriesScreen extends StatelessWidget {
   static String route = "/categoriesScreen";
   @override
   Widget build(BuildContext context) {
+    print("CategoriesScreen build");
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
