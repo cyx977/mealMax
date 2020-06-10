@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:maxMeal/screen/categories_screen.dart';
+import './categories_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   static final route = "/";

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './testscreen.dart';
 import '../dummy_data.dart';
 import '../model/meal.dart';
 
@@ -22,6 +23,9 @@ class CategoryMealsScreen extends StatelessWidget {
     List<Meal> catMealData = categoryMeals(id).toList();
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        Navigator.pushNamed(context, TestScreen.route);
+      }),
       appBar: AppBar(
         title: Text(title),
       ),

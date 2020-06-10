@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:maxMeal/category_item.dart';
+import '../widgets/category_item.dart';
+import './testscreen.dart';
 import '../dummy_data.dart';
 import '../model/category.dart';
 
@@ -10,7 +11,9 @@ class CategoriesScreen extends StatelessWidget {
     print("CategoriesScreen build");
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, TestScreen.route);
+        },
         child: CircleAvatar(
           child: Icon(Icons.add),
         ),
