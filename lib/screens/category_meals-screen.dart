@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maxMeal/widgets/meal_item.dart';
 import './testscreen.dart';
 import '../dummy_data.dart';
 import '../model/meal.dart';
@@ -23,15 +24,27 @@ class CategoryMealsScreen extends StatelessWidget {
     List<Meal> catMealData = categoryMeals(id).toList();
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        Navigator.pushNamed(context, TestScreen.route);
-      }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, TestScreen.route);
+        },
+        child: CircleAvatar(
+          child: Icon(
+            Icons.phone_in_talk,
+          ),
+        ),
+      ),
       appBar: AppBar(
         title: Text(title),
       ),
       body: ListView.builder(
         itemBuilder: (context, index) {
-          return Text(catMealData[index].title);
+          return MealItem(
+            title: catMealData[index].title,
+            url: catMealData[index].imageUrl,
+            affordability: catMealData[index].affordability.toString(),
+            duration: catMealData[index].duration.toString(),
+          );
         },
         itemCount: catMealData.length,
       ),

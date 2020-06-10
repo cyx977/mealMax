@@ -189,8 +189,8 @@ const DUMMY_MEALS = const [
   Meal(
     id: 'm5',
     categories: [
-      'c2'
-          'c5',
+      'c2',
+      'c5',
       'c10',
     ],
     title: 'Salad with Smoked Salmon',
@@ -411,21 +411,23 @@ List<Meal> categoryMeals(String categoryId) {
   Iterable catMeals = DUMMY_MEALS.where((element) {
     return element.categories.contains(categoryId);
   });
-  return catMeals.map(
-    (e) => Meal(
-      affordability: e.affordability,
-      categories: e.categories,
-      complexity: e.complexity,
-      duration: e.duration,
-      id: e.id,
-      imageUrl: e.imageUrl,
-      ingredients: e.ingredients,
-      isGlutenFree: e.isGlutenFree,
-      isLactoseFree: e.isLactoseFree,
-      isVegan: e.isVegan,
-      isVegeterian: e.isVegeterian,
-      steps: e.steps,
-      title: e.title,
-    ),
-  ).toList();
+  return catMeals
+      .map(
+        (e) => Meal(
+          affordability: e.affordability,
+          categories: e.categories,
+          complexity: e.complexity,
+          duration: e.duration,
+          id: e.id,
+          imageUrl: e.imageUrl,
+          ingredients: e.ingredients,
+          isGlutenFree: e.isGlutenFree,
+          isLactoseFree: e.isLactoseFree,
+          isVegan: e.isVegan,
+          isVegeterian: e.isVegeterian,
+          steps: e.steps,
+          title: e.title,
+        ),
+      )
+      .toList();
 }

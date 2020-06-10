@@ -9,9 +9,9 @@ class CategoryItem extends StatelessWidget {
   final Color color;
 
   CategoryItem({
-    this.title,
-    this.id,
-    this.color,
+    @required this.title,
+    @required this.id,
+    @required this.color,
   });
 
   _mealPage(BuildContext context) {
