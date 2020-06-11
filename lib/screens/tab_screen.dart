@@ -10,15 +10,14 @@ class _TabScreenState extends State<TabScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      initialIndex: 2,
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           title: Text("Tab Test"),
           bottom: TabBar(
             tabs: [
               Tab(
-                text: "tab1",
+                text: "Categories",
                 icon: Icon(
                   Icons.category,
                   color: Theme.of(context).accentColor,
@@ -31,18 +30,6 @@ class _TabScreenState extends State<TabScreen> {
                   color: Theme.of(context).accentColor,
                 ),
                 child: Text("tab2"),
-              ),
-              GestureDetector(
-                onTap: (){
-                  print("test");
-                },
-                child: Tab(
-                  icon: Icon(
-                    Icons.touch_app,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  child: Text("tab3"),
-                ),
               ),
             ],
           ),

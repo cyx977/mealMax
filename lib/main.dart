@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
         canvasColor: Colors.yellow[50].withOpacity(0.8),
       ),
       routes: {
-        // MyHomePage.route: (context) => MyHomePage(title: "Modern Meal App"),
-        TabScreen.route: (context) => TabScreen(),
+        MyHomePage.route: (context) => MyHomePage(title: "Modern Meal App"),
+        // TabScreen.route: (context) => TabScreen(),
         CategoriesScreen.route: (context) => CategoriesScreen(),
         CategoryMealsScreen.route: (context) => CategoryMealsScreen(),
         MealDetailScreen.route: (context) => MealDetailScreen(),

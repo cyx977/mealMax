@@ -8,25 +8,7 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("CategoriesScreen build");
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, "thisRouteDoesntExist", arguments: "TestArgumentFromPushNamed");
-        },
-        child: CircleAvatar(
-          child: Icon(Icons.add),
-        ),
-      ),
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.settings),
-          ),
-        ],
-        title: Text("Modern Meal App"),
-      ),
-      body: SafeArea(
+    return SafeArea(
         child: GridView(
           padding: EdgeInsets.all(25.0),
           children: [
@@ -45,7 +27,6 @@ class CategoriesScreen extends StatelessWidget {
             mainAxisSpacing: 20,
           ),
         ),
-      ),
-    );
+      );
   }
 }
