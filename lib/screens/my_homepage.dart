@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/main_drawer.dart';
 import './categories_screen.dart';
 import './favourite_screen.dart';
 
@@ -24,6 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
     print("homepagebuild");
     return Scaffold(
       appBar: AppBar(
+        
         actions: [
           IconButton(
             icon: Icon(
@@ -36,11 +38,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         title: Text(_pages[_selectedIndex]['title']),
       ),
+      drawer: MainDrawer(),
       body: _pages[_selectedIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.pink,
+        backgroundColor: Theme.of(context).primaryColor,
         // type: BottomNavigationBarType.fixed, //default
-        // type: BottomNavigationBarType.shifting
+        // type: BottomNavigationBarType.shifting,
         selectedItemColor: Theme.of(context).accentColor,
         unselectedItemColor: Colors.black38,
         currentIndex: _selectedIndex,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maxMeal/screens/error_screen.dart';
+import 'package:maxMeal/screens/filter_screen.dart';
 import 'package:maxMeal/screens/meal_detail_screen.dart';
 import 'package:maxMeal/screens/my_homepage.dart';
 
@@ -28,10 +29,10 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         MyHomePage.route: (context) => MyHomePage(title: "Modern Meal App"),
-        // TabScreen.route: (context) => TabScreen(),
         CategoriesScreen.route: (context) => CategoriesScreen(),
         CategoryMealsScreen.route: (context) => CategoryMealsScreen(),
         MealDetailScreen.route: (context) => MealDetailScreen(),
+        FiltersScreen.route: (context) => FiltersScreen(),
       },
       onGenerateRoute: (RouteSettings settings) {
         print("onGenerateRoute");
