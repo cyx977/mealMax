@@ -16,6 +16,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        textTheme: TextTheme(
+          headline6: TextStyle(
+            fontSize: 20,
+          ),
+        ),
         primarySwatch: Colors.pink,
         accentColor: Colors.amber,
         visualDensity: VisualDensity.adaptivePlatformDensity,
