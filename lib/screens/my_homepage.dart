@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import './categories_screen.dart';
-import '../screens/favourite_screen.dart';
+import './favourite_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   static final route = "/";
@@ -13,46 +13,52 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final List<Map<String,dynamic>> _pages = [
+    {'page': CategoriesScreen(), 'title' : "Categories"},
+    {'page': FavouriteScreen(), 'title': "Your Favourites"}
+  ];
+  int _selectedIndex = 0;
   TabController tabController;
   @override
   Widget build(BuildContext context) {
     print("homepagebuild");
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              icon: Icon(
-                Icons.settings,
-              ),
-              onPressed: () {},
-            )
-          ],
-          title: Text(widget.title),
-          bottom: TabBar(
-            labelColor: Colors.white,
-            unselectedLabelColor: Colors.grey[300],
-            tabs: [
-              Tab(
-                icon: Icon(
-                  Icons.grid_on,
-                ),
-                text: "Categories",
-              ),
-              Tab(
-                icon: Icon(Icons.beenhere),
-                text: "Favourites",
-              ),
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.settings,
+            ),
+            onPressed: () {
+
+            },
+          )
+        ],
+        title: Text(_pages[_selectedIndex]['title']),
+      ),
+      body: _pages[_selectedIndex]['page'],
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.pink,
+        // type: BottomNavigationBarType.fixed, //default
+        // type: BottomNavigationBarType.shifting
+        selectedItemColor: Theme.of(context).accentColor,
+        unselectedItemColor: Colors.black38,
+        currentIndex: _selectedIndex,
+        onTap: (int index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.category),
+            title: Text("Categories"),
           ),
-        ),
-        body: TabBarView(
-          children: [
-            CategoriesScreen(),
-            FavouriteScreen(),
-          ],
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star),
+            title: Text("Favourites"),
+          )
+        ],
       ),
     );
   }
