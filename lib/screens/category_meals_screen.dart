@@ -14,6 +14,7 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   String id;
   String title;
   List<Meal> displayedMeals;
+  var _loadedInitData = false;
   @override
   void initState() {
     super.initState();
@@ -21,10 +22,15 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
 
   @override
   void didChangeDependencies() {
-    Map<String, dynamic> routeArgs = ModalRoute.of(context).settings.arguments;
-    id = routeArgs['id'];
-    title = routeArgs['title'];
-    displayedMeals = categoryMeals(id).toList();
+    //every initState triggers didChangeDependencies so the data would be loaded again and again
+    if (_loadedInitData == false) {
+      Map<String, dynamic> routeArgs =
+          ModalRoute.of(context).settings.arguments;
+      id = routeArgs['id'];
+      title = routeArgs['title'];
+      displayedMeals = categoryMeals(id).toList();
+    }
+    _loadedInitData = true;
     super.didChangeDependencies();
   }
 
