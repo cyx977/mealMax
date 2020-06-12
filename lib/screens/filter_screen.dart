@@ -2,21 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:maxMeal/widgets/main_drawer.dart';
 
 class FiltersScreen extends StatefulWidget {
+  final Function saveFilterFunction;
+  final Map<String, bool> filters;
   static final String route = "/filterScreen";
+  FiltersScreen({
+    @required this.saveFilterFunction,
+    @required this.filters,
+  });
   @override
   _FiltersScreenState createState() => _FiltersScreenState();
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
-  var isGlutenFree = false;
-  var isVegan = false;
-  var isVegeterian = false;
-  var isLactoseFree = false;
+  @override
+  void initState() {
+    isGlutenFree = widget.filters['isGlutenFree'];
+    isVegan = widget.filters['isVegan'];
+    isVegeterian = widget.filters['isVegeterian'];
+    isLactoseFree = widget.filters['isLactoseFree'];
+    super.initState();
+  }
+
+  var isGlutenFree;
+  var isVegan;
+  var isVegeterian;
+  var isLactoseFree;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MainDrawer(),
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.save),
+            onPressed: () {
+              Map<String, bool> x = {
+                "isGlutenFree": isGlutenFree,
+                "isVegan": isVegan,
+                "isVegeterian": isVegeterian,
+                "isLactoseFree": isLactoseFree,
+              };
+              widget.saveFilterFunction(x);
+            },
+          )
+        ],
+      ),
       body: Column(
         children: [
           Container(

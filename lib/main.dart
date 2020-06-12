@@ -11,7 +11,25 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Map<String, bool> _filters = {
+    "isGlutenFree": false,
+    "isVegan": false,
+    "isVegeterian": false,
+    "isLactoseFree": false,
+  };
+
+  void _saveFilters(Map<String, bool> filterArg) {
+    setState(() {
+      _filters = filterArg;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,7 +50,8 @@ class MyApp extends StatelessWidget {
         CategoriesScreen.route: (context) => CategoriesScreen(),
         CategoryMealsScreen.route: (context) => CategoryMealsScreen(),
         MealDetailScreen.route: (context) => MealDetailScreen(),
-        FiltersScreen.route: (context) => FiltersScreen(),
+        FiltersScreen.route: (context) =>
+            FiltersScreen(saveFilterFunction: _saveFilters, filters: _filters),
       },
       onGenerateRoute: (RouteSettings settings) {
         print("onGenerateRoute");
