@@ -8,6 +8,7 @@ class MealItem extends StatelessWidget {
   final String url;
   final Affordability affordability;
   final String duration;
+  final Function removeItem;
 
   String get printAffordability {
     switch (affordability) {
@@ -39,9 +40,15 @@ class MealItem extends StatelessWidget {
     @required this.duration,
     @required this.title,
     @required this.id,
+    @required this.removeItem,
   });
   void selectMeal(BuildContext context) {
-    Navigator.pushNamed(context, MealDetailScreen.route, arguments: id);
+    Navigator.pushNamed(context, MealDetailScreen.route, arguments: id)
+        .then((id) {
+          if(id != null){
+            removeItem(id);
+          }
+        });
   }
 
   @override

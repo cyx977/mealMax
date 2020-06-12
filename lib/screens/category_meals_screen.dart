@@ -15,15 +15,12 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   String title;
   List<Meal> displayedMeals;
   var _loadedInitData = false;
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void didChangeDependencies() {
     //every initState triggers didChangeDependencies so the data would be loaded again and again
-    if (_loadedInitData == false) {
+    if (!_loadedInitData) {
+      print("data loading");
       Map<String, dynamic> routeArgs =
           ModalRoute.of(context).settings.arguments;
       id = routeArgs['id'];
@@ -35,7 +32,9 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   }
 
   void removeMeal(String mealId) {
-    displayedMeals.removeWhere((Meal meal) => meal.id == mealId);
+    setState(() {
+      displayedMeals.removeWhere((Meal meal) => meal.id == mealId);
+    });
   }
 
   @override
@@ -60,6 +59,7 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
             url: displayedMeals[index].imageUrl,
             affordability: displayedMeals[index].affordability,
             duration: displayedMeals[index].duration.toString(),
+            removeItem: removeMeal,
           );
         },
         itemCount: displayedMeals.length,

@@ -10,10 +10,12 @@ class MealDetailScreen extends StatelessWidget {
     final Meal meal = selectedMeal(mealId);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
         child: CircleAvatar(
           child: Icon(Icons.delete),
         ),
+        onPressed: () {
+          Navigator.of(context).pop(mealId);
+        },
       ),
       appBar: AppBar(
         title: Text(meal.title),

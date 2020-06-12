@@ -434,6 +434,5 @@ List<Meal> categoryMeals(String categoryId) {
 
 Meal selectedMeal(String id) {
   var selectedMeal = DUMMY_MEALS.firstWhere((element) => element.id == id);
-  print(selectedMeal.title);
   return selectedMeal;
 }

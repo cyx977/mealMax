@@ -7,7 +7,6 @@ class CategoriesScreen extends StatelessWidget {
   static String route = "/categoriesScreen";
   @override
   Widget build(BuildContext context) {
-    print("CategoriesScreen build");
     return SafeArea(
         child: GridView(
           padding: EdgeInsets.all(25.0),
