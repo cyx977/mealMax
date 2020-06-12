@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:maxMeal/screens/error_screen.dart';
-import 'package:maxMeal/screens/filter_screen.dart';
-import 'package:maxMeal/screens/meal_detail_screen.dart';
-import 'package:maxMeal/screens/my_homepage.dart';
+import './screens/error_screen.dart';
+import './screens/filter_screen.dart';
+import './screens/meal_detail_screen.dart';
+import './screens/my_homepage.dart';
 
-import 'package:maxMeal/screens/categories_screen.dart';
-import 'package:maxMeal/screens/category_meals_screen.dart';
+import './screens/categories_screen.dart';
+import './screens/category_meals_screen.dart';
+
+import './model/meal.dart';
+import './dummy_data.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,9 +27,27 @@ class _MyAppState extends State<MyApp> {
     "isLactoseFree": false,
   };
 
+  List<Meal> availableMeals = DUMMY_MEALS;
+
   void _saveFilters(Map<String, bool> filterArg) {
     setState(() {
       _filters = filterArg;
+      availableMeals = DUMMY_MEALS;
+      availableMeals = availableMeals.where((Meal meal) {
+        if(_filters['isGlutenFree'] && !meal.isGlutenFree){
+          return false;
+        }
+        if(_filters['isVegan'] && !meal.isVegan){
+          return false;
+        }
+        if(_filters['isVegeterian'] && !meal.isVegeterian){
+          return false;
+        }
+        if(_filters['isLactoseFree'] && !meal.isLactoseFree){
+          return false;
+        }
+        return true;
+      }).toList();
     });
   }
 
@@ -48,10 +69,13 @@ class _MyAppState extends State<MyApp> {
       routes: {
         MyHomePage.route: (context) => MyHomePage(title: "Modern Meal App"),
         CategoriesScreen.route: (context) => CategoriesScreen(),
-        CategoryMealsScreen.route: (context) => CategoryMealsScreen(),
+        CategoryMealsScreen.route: (context) =>
+            CategoryMealsScreen(availableMeals: availableMeals),
         MealDetailScreen.route: (context) => MealDetailScreen(),
-        FiltersScreen.route: (context) =>
-            FiltersScreen(saveFilterFunction: _saveFilters, filters: _filters),
+        FiltersScreen.route: (context) => FiltersScreen(
+              saveFilterFunction: _saveFilters,
+              filters: _filters,
+            ),
       },
       onGenerateRoute: (RouteSettings settings) {
         print("onGenerateRoute");

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:maxMeal/widgets/meal_item.dart';
-import '../dummy_data.dart';
+// import '../dummy_data.dart';
 import '../model/meal.dart';
 
 class CategoryMealsScreen extends StatefulWidget {
   static final String route = "/category-meals";
+  final List<Meal> availableMeals;
+  CategoryMealsScreen({@required this.availableMeals});
 
   @override
   _CategoryMealsScreenState createState() => _CategoryMealsScreenState();
@@ -25,7 +27,28 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
           ModalRoute.of(context).settings.arguments;
       id = routeArgs['id'];
       title = routeArgs['title'];
-      displayedMeals = categoryMeals(id).toList();
+      // displayedMeals = categoryMeals(id).toList();
+       var dummy = widget.availableMeals
+          .where((Meal meal) => meal.categories.contains(id)).toList();
+      displayedMeals = dummy
+          .map(
+            (e) => Meal(
+              affordability: e.affordability,
+              categories: e.categories,
+              complexity: e.complexity,
+              duration: e.duration,
+              id: e.id,
+              imageUrl: e.imageUrl,
+              ingredients: e.ingredients,
+              isGlutenFree: e.isGlutenFree,
+              isLactoseFree: e.isLactoseFree,
+              isVegan: e.isVegan,
+              isVegeterian: e.isVegeterian,
+              steps: e.steps,
+              title: e.title,
+            ),
+          )
+          .toList();
     }
     _loadedInitData = true;
     super.didChangeDependencies();
