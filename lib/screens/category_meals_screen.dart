@@ -3,20 +3,37 @@ import 'package:maxMeal/widgets/meal_item.dart';
 import '../dummy_data.dart';
 import '../model/meal.dart';
 
-class CategoryMealsScreen extends StatelessWidget {
+class CategoryMealsScreen extends StatefulWidget {
   static final String route = "/category-meals";
-  
+
+  @override
+  _CategoryMealsScreenState createState() => _CategoryMealsScreenState();
+}
+
+class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
+  String id;
+  String title;
+  List<Meal> displayedMeals;
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    Map<String, dynamic> routeArgs = ModalRoute.of(context).settings.arguments;
+    id = routeArgs['id'];
+    title = routeArgs['title'];
+    displayedMeals = categoryMeals(id).toList();
+    super.didChangeDependencies();
+  }
+
+  void removeMeal(String mealId) {
+    displayedMeals.removeWhere((Meal meal) => meal.id == mealId);
+  }
+
   @override
   Widget build(BuildContext context) {
-    print("categoryMealsScreen build");
-
-    Map<String, dynamic> routeArgs = ModalRoute.of(context).settings.arguments;
-
-    String id = routeArgs['id'];
-    String title = routeArgs['title'];
-
-    List<Meal> catMealData = categoryMeals(id).toList();
-
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -32,14 +49,14 @@ class CategoryMealsScreen extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (context, index) {
           return MealItem(
-            id: catMealData[index].id,
-            title: catMealData[index].title,
-            url: catMealData[index].imageUrl,
-            affordability: catMealData[index].affordability,
-            duration: catMealData[index].duration.toString(),
+            id: displayedMeals[index].id,
+            title: displayedMeals[index].title,
+            url: displayedMeals[index].imageUrl,
+            affordability: displayedMeals[index].affordability,
+            duration: displayedMeals[index].duration.toString(),
           );
         },
-        itemCount: catMealData.length,
+        itemCount: displayedMeals.length,
       ),
     );
   }
