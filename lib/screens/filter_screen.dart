@@ -27,37 +27,41 @@ class _FiltersScreenState extends State<FiltersScreen> {
           Expanded(
             child: ListView(
               children: [
-                SwitchListTile(
-                  title: Text("Gluten Free"),
+                buildSwitchListTile(
+                  title: "Gluten Free",
                   value: isGlutenFree,
-                  onChanged: (bool val) {
+                  subtitle: "Includes Gluten Free Meals only.",
+                  changeHandler: (bool val) {
                     setState(() {
                       isGlutenFree = val;
                     });
                   },
                 ),
-                SwitchListTile(
-                  title: Text("Vegan"),
+                buildSwitchListTile(
+                  title: "Vegan",
                   value: isVegan,
-                  onChanged: (bool val) {
+                  subtitle: "Includes Vegan Meals only.",
+                  changeHandler: (bool val) {
                     setState(() {
                       isVegan = val;
                     });
                   },
                 ),
-                SwitchListTile(
-                  title: Text("Vegeterian"),
+                buildSwitchListTile(
+                  title: "Vegeterian",
                   value: isVegeterian,
-                  onChanged: (bool val) {
+                  subtitle: "Includes Vegeterian Meals only.",
+                  changeHandler: (bool val) {
                     setState(() {
                       isVegeterian = val;
                     });
                   },
                 ),
-                SwitchListTile(
-                  title: Text("Lactose Free"),
+                buildSwitchListTile(
+                  title: "Lactose Free",
                   value: isLactoseFree,
-                  onChanged: (bool val) {
+                  subtitle: "Includes Lactose Free Meals only.",
+                  changeHandler: (bool val) {
                     setState(() {
                       isLactoseFree = val;
                     });
@@ -68,6 +72,20 @@ class _FiltersScreenState extends State<FiltersScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  SwitchListTile buildSwitchListTile({
+    @required String title,
+    @required String subtitle,
+    @required bool value,
+    @required Function changeHandler,
+  }) {
+    return SwitchListTile(
+      title: Text(title),
+      subtitle: Text(subtitle),
+      value: value,
+      onChanged: changeHandler,
     );
   }
 }
