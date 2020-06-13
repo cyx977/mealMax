@@ -4,10 +4,10 @@ import 'package:maxMeal/model/meal.dart';
 
 class FavouriteMealDetailScreen extends StatelessWidget {
   final Function isFavourite;
-  // final Function toggleFavourite;
+  final Function toggleFavourite;
 
   FavouriteMealDetailScreen({
-    // @required this.toggleFavourite,
+    @required this.toggleFavourite,
     @required this.isFavourite,
   });
   static const route = "/favourite-meal-detail";
@@ -34,7 +34,7 @@ class FavouriteMealDetailScreen extends StatelessWidget {
             ),
             onPressed: () {
               toggleFavouriteNOTMAIN(mealId);
-              // toggleFavourite(mealId);
+              toggleFavourite(mealId);
             },
           )
         ],

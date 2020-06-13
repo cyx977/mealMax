@@ -9,6 +9,7 @@ class FavouriteMealItem extends StatelessWidget {
   final Affordability affordability;
   final String duration;
   final Function toggleFavouriteNOTMAIN;
+  final bool isFavourite;
 
   String get printAffordability {
     switch (affordability) {
@@ -41,11 +42,13 @@ class FavouriteMealItem extends StatelessWidget {
     @required this.title,
     @required this.id,
     @required this.toggleFavouriteNOTMAIN,
+    @required this.isFavourite,
   });
   void selectMeal(BuildContext context) {
     Navigator.pushNamed(context, FavouriteMealDetailScreen.route, arguments: {
       "id": id,
-      "toggleFavouriteNOTMAIN": toggleFavouriteNOTMAIN
+      "toggleFavouriteNOTMAIN": toggleFavouriteNOTMAIN,
+      "isFavourite": isFavourite,
     });
   }
 

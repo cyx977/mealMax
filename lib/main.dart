@@ -104,7 +104,7 @@ class _MyAppState extends State<MyApp> {
             ),
         FavouriteMealDetailScreen.route: (context) => FavouriteMealDetailScreen(
               isFavourite: isFavourite,
-              // toggleFavourite: toggleFavourite,
+              toggleFavourite: toggleFavourite,
             ),
       },
       onGenerateRoute: (RouteSettings settings) {
@@ -112,9 +112,9 @@ class _MyAppState extends State<MyApp> {
         print(settings.name);
         var generatedRouteArgs = settings.arguments;
         print(generatedRouteArgs);
-        return MaterialPageRoute(
-          builder: (context) => ErrorPage(),
-        );
+        // return MaterialPageRoute(
+        //   builder: (context) => ErrorPage(),
+        // );
       },
       onUnknownRoute: (RouteSettings settings) {
         //this is triggered when nothing works

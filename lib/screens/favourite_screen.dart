@@ -18,7 +18,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
 
   @override
   void didChangeDependencies() {
-    favouriteMealX = widget.favouriteMeal;
+    favouriteMealX = [...widget.favouriteMeal];
     super.didChangeDependencies();
   }
 
@@ -37,11 +37,12 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         );
       });
     }
-    print("not main $favouriteMealX");
   }
 
   @override
   Widget build(BuildContext context) {
+    print("main's ${widget.favouriteMeal}");
+    print("not main $favouriteMealX");
     return Container(
       child: favouriteMealX.isEmpty
           ? Center(
@@ -57,6 +58,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                     affordability: favouriteMealX[index].affordability,
                     duration: favouriteMealX[index].duration.toString(),
                     toggleFavouriteNOTMAIN: toggleFavouriteNOTMAIN,
+                    isFavourite: favouriteMealX.contains(favouriteMealX[index]),
                   );
                 },
                 itemCount: favouriteMealX.length,

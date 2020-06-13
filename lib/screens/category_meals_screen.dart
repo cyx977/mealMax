@@ -63,7 +63,9 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, "asdasd");
+        },
         child: CircleAvatar(
           child: Icon(
             Icons.phone_in_talk,
