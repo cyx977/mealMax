@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './screens/favourite_meal_detail_screen.dart';
 import './screens/error_screen.dart';
 import './screens/filter_screen.dart';
 import './screens/meal_detail_screen.dart';
@@ -30,22 +31,25 @@ class _MyAppState extends State<MyApp> {
   List<Meal> availableMeals = DUMMY_MEALS;
   List<Meal> _favouriteMeals = [];
 
-  void toggleFilter(String mealId) {
+  void toggleFavourite(String mealId) {
     int _existingMeal = _favouriteMeals.indexWhere((meal) => meal.id == mealId);
     if (_existingMeal >= 0) {
+      print("removing from main");
       setState(() {
         _favouriteMeals.removeAt(_existingMeal);
       });
     } else {
+      print("adding from main");
       setState(() {
         _favouriteMeals.add(
           DUMMY_MEALS.firstWhere((meal) => meal.id == mealId),
         );
       });
     }
+    print("main $_favouriteMeals");
   }
 
-  bool isFavourite(String mealId){
+  bool isFavourite(String mealId) {
     return _favouriteMeals.any((meal) => meal.id == mealId);
   }
 
@@ -92,11 +96,15 @@ class _MyAppState extends State<MyApp> {
         CategoriesScreen.route: (context) => CategoriesScreen(),
         CategoryMealsScreen.route: (context) =>
             CategoryMealsScreen(availableMeals: availableMeals),
-        MealDetailScreen.route: (context) =>
-            MealDetailScreen(toggleFilter: toggleFilter, isFavourite: isFavourite),
+        MealDetailScreen.route: (context) => MealDetailScreen(
+            toggleFavourite: toggleFavourite, isFavourite: isFavourite),
         FiltersScreen.route: (context) => FiltersScreen(
               saveFilterFunction: _saveFilters,
               filters: _filters,
+            ),
+        FavouriteMealDetailScreen.route: (context) => FavouriteMealDetailScreen(
+              isFavourite: isFavourite,
+              // toggleFavourite: toggleFavourite,
             ),
       },
       onGenerateRoute: (RouteSettings settings) {

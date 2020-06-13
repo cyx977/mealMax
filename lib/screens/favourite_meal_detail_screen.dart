@@ -2,30 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:maxMeal/dummy_data.dart';
 import 'package:maxMeal/model/meal.dart';
 
-class MealDetailScreen extends StatelessWidget {
-  final Function toggleFavourite;
+class FavouriteMealDetailScreen extends StatelessWidget {
   final Function isFavourite;
-  MealDetailScreen({@required this.toggleFavourite, @required this.isFavourite});
-  static const route = "/meal-detail";
+  // final Function toggleFavourite;
+
+  FavouriteMealDetailScreen({
+    // @required this.toggleFavourite,
+    @required this.isFavourite,
+  });
+  static const route = "/favourite-meal-detail";
   @override
   Widget build(BuildContext context) {
-    final Map<String, dynamic> routeArgs =
-        ModalRoute.of(context).settings.arguments;
+    Map<String, dynamic> routeArgs = ModalRoute.of(context).settings.arguments;
     String mealId = routeArgs['id'] as String;
-    bool deletable = routeArgs['deletable'] as bool;
+    Function toggleFavouriteNOTMAIN = routeArgs['toggleFavouriteNOTMAIN'];
 
     final Meal meal = selectedMeal(mealId);
     return Scaffold(
-      floatingActionButton: deletable
-          ? FloatingActionButton(
-              child: CircleAvatar(
-                child: Icon(Icons.delete),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop(mealId);
-              },
-            )
-          : null,
       appBar: AppBar(
         title: Text(meal.title),
         actions: [
@@ -40,7 +33,8 @@ class MealDetailScreen extends StatelessWidget {
                   : Icon(Icons.star_border),
             ),
             onPressed: () {
-              toggleFavourite(mealId);
+              toggleFavouriteNOTMAIN(mealId);
+              // toggleFavourite(mealId);
             },
           )
         ],

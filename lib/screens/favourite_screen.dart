@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widgets/meal_item.dart';
+import '../dummy_data.dart';
+import '../widgets/favourite_meal_item.dart';
 import '../model/meal.dart';
 
 class FavouriteScreen extends StatefulWidget {
@@ -13,25 +14,52 @@ class FavouriteScreen extends StatefulWidget {
 }
 
 class _FavouriteScreenState extends State<FavouriteScreen> {
+  List<Meal> favouriteMealX;
+
+  @override
+  void didChangeDependencies() {
+    favouriteMealX = widget.favouriteMeal;
+    super.didChangeDependencies();
+  }
+
+  void toggleFavouriteNOTMAIN(String mealId) {
+    int _existingMeal = favouriteMealX.indexWhere((meal) => meal.id == mealId);
+    if (_existingMeal >= 0) {
+      print("removing from NOTmain");
+      setState(() {
+        favouriteMealX.removeAt(_existingMeal);
+      });
+    } else {
+      print("addming from NOTmain");
+      setState(() {
+        favouriteMealX.add(
+          DUMMY_MEALS.firstWhere((meal) => meal.id == mealId),
+        );
+      });
+    }
+    print("not main $favouriteMealX");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: widget.favouriteMeal.isEmpty
+      child: favouriteMealX.isEmpty
           ? Center(
               child: Text("Favourites is empty, Start adding some"),
             )
           : Center(
               child: ListView.builder(
                 itemBuilder: (context, index) {
-                  return MealItem(
-                    id: widget.favouriteMeal[index].id,
-                    title: widget.favouriteMeal[index].title,
-                    url: widget.favouriteMeal[index].imageUrl,
-                    affordability: widget.favouriteMeal[index].affordability,
-                    duration: widget.favouriteMeal[index].duration.toString(),
+                  return FavouriteMealItem(
+                    id: favouriteMealX[index].id,
+                    title: favouriteMealX[index].title,
+                    url: favouriteMealX[index].imageUrl,
+                    affordability: favouriteMealX[index].affordability,
+                    duration: favouriteMealX[index].duration.toString(),
+                    toggleFavouriteNOTMAIN: toggleFavouriteNOTMAIN,
                   );
                 },
-                itemCount: widget.favouriteMeal.length,
+                itemCount: favouriteMealX.length,
               ),
             ),
     );

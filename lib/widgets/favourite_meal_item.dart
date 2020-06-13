@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:maxMeal/screens/category_meals_screen.dart';
-import 'package:maxMeal/screens/meal_detail_screen.dart';
-import 'package:maxMeal/screens/my_homepage.dart';
+import '../screens/favourite_meal_detail_screen.dart';
 import '../model/meal.dart';
 
-class MealItem extends StatelessWidget {
+class FavouriteMealItem extends StatelessWidget {
   final String id;
   final String title;
   final String url;
   final Affordability affordability;
   final String duration;
-  final Function removeItem;
+  final Function toggleFavouriteNOTMAIN;
 
   String get printAffordability {
     switch (affordability) {
@@ -36,36 +34,19 @@ class MealItem extends StatelessWidget {
     }
   }
 
-  MealItem({
+  FavouriteMealItem({
     @required this.url,
     @required this.affordability,
     @required this.duration,
     @required this.title,
     @required this.id,
-    this.removeItem,
+    @required this.toggleFavouriteNOTMAIN,
   });
   void selectMeal(BuildContext context) {
-    var route = ModalRoute.of(context).settings.name;
-    if (route == CategoryMealsScreen.route) {
-      Navigator.pushNamed(context, MealDetailScreen.route, arguments: {
-        "id": id,
-        "deletable": true,
-      }).then((id) {
-        if (id != null && removeItem != null) {
-          removeItem(id);
-        }
-      });
-    }
-    if (route == MyHomePage.route) {
-      Navigator.pushNamed(
-        context,
-        MealDetailScreen.route,
-        arguments: {
-          "id": id,
-          "deletable": false,
-        },
-      );
-    }
+    Navigator.pushNamed(context, FavouriteMealDetailScreen.route, arguments: {
+      "id": id,
+      "toggleFavouriteNOTMAIN": toggleFavouriteNOTMAIN
+    });
   }
 
   @override

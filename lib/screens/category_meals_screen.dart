@@ -22,7 +22,6 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   void didChangeDependencies() {
     //every initState triggers didChangeDependencies so the data would be loaded again and again
     if (!_loadedInitData) {
-      print("data loading");
       Map<String, dynamic> routeArgs =
           ModalRoute.of(context).settings.arguments;
       id = routeArgs['id'];
