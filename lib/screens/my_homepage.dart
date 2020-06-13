@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import '../model/meal.dart';
 import '../widgets/main_drawer.dart';
 import './categories_screen.dart';
 import './favourite_screen.dart';
 
 class MyHomePage extends StatefulWidget {
+  final List<Meal> favouriteMeal;
   static final route = "/";
-  MyHomePage({this.title});
+  MyHomePage({
+    @required this.title,
+    @required this.favouriteMeal,
+  });
 
   final String title;
 
@@ -14,25 +19,32 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Map<String,dynamic>> _pages = [
-    {'page': CategoriesScreen(), 'title' : "Categories"},
-    {'page': FavouriteScreen(), 'title': "Your Favourites"}
-  ];
+  List<Map<String, dynamic>> _pages;
   int _selectedIndex = 0;
   TabController tabController;
+
+  @override
+  void initState() {
+    _pages = [
+      {'page': CategoriesScreen(), 'title': "Categories"},
+      {
+        'page': FavouriteScreen(favouriteMeal: widget.favouriteMeal),
+        'title': "Your Favourites"
+      }
+    ];
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
         actions: [
           IconButton(
             icon: Icon(
               Icons.settings,
             ),
-            onPressed: () {
-
-            },
+            onPressed: () {},
           )
         ],
         title: Text(_pages[_selectedIndex]['title']),

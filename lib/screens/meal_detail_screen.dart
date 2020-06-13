@@ -3,22 +3,47 @@ import 'package:maxMeal/dummy_data.dart';
 import 'package:maxMeal/model/meal.dart';
 
 class MealDetailScreen extends StatelessWidget {
+  final Function toggleFilter;
+  final Function isFavourite;
+  MealDetailScreen({@required this.toggleFilter, @required this.isFavourite});
   static const route = "/meal-detail";
   @override
   Widget build(BuildContext context) {
-    final mealId = ModalRoute.of(context).settings.arguments as String;
+    final Map<String, dynamic> routeArgs =
+        ModalRoute.of(context).settings.arguments;
+    String mealId = routeArgs['id'] as String;
+    bool deletable = routeArgs['deletable'] as bool;
+
     final Meal meal = selectedMeal(mealId);
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: CircleAvatar(
-          child: Icon(Icons.delete),
-        ),
-        onPressed: () {
-          Navigator.of(context).pop(mealId);
-        },
-      ),
+      floatingActionButton: deletable
+          ? FloatingActionButton(
+              child: CircleAvatar(
+                child: Icon(Icons.delete),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(mealId);
+              },
+            )
+          : null,
       appBar: AppBar(
         title: Text(meal.title),
+        actions: [
+          IconButton(
+            icon: CircleAvatar(
+              backgroundColor: Colors.white,
+              child: isFavourite(mealId)
+                  ? Icon(
+                      Icons.star,
+                      size: 29,
+                    )
+                  : Icon(Icons.star_border),
+            ),
+            onPressed: () {
+              toggleFilter(mealId);
+            },
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -55,11 +80,6 @@ class MealDetailScreen extends StatelessWidget {
                 itemBuilder: (context, index) => Column(
                   children: [
                     ListTile(
-                      /* child: Padding(
-                        padding:
-                            const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                        child: Text(meal.steps[index]),
-                      ), */
                       leading: CircleAvatar(
                         child: Text("# ${index + 1}"),
                       ),

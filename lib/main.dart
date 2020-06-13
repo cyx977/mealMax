@@ -28,22 +28,42 @@ class _MyAppState extends State<MyApp> {
   };
 
   List<Meal> availableMeals = DUMMY_MEALS;
+  List<Meal> _favouriteMeals = [];
+
+  void toggleFilter(String mealId) {
+    int _existingMeal = _favouriteMeals.indexWhere((meal) => meal.id == mealId);
+    if (_existingMeal >= 0) {
+      setState(() {
+        _favouriteMeals.removeAt(_existingMeal);
+      });
+    } else {
+      setState(() {
+        _favouriteMeals.add(
+          DUMMY_MEALS.firstWhere((meal) => meal.id == mealId),
+        );
+      });
+    }
+  }
+
+  bool isFavourite(String mealId){
+    return _favouriteMeals.any((meal) => meal.id == mealId);
+  }
 
   void _saveFilters(Map<String, bool> filterArg) {
     setState(() {
       _filters = filterArg;
       availableMeals = DUMMY_MEALS;
       availableMeals = availableMeals.where((Meal meal) {
-        if(_filters['isGlutenFree'] && !meal.isGlutenFree){
+        if (_filters['isGlutenFree'] && !meal.isGlutenFree) {
           return false;
         }
-        if(_filters['isVegan'] && !meal.isVegan){
+        if (_filters['isVegan'] && !meal.isVegan) {
           return false;
         }
-        if(_filters['isVegeterian'] && !meal.isVegeterian){
+        if (_filters['isVegeterian'] && !meal.isVegeterian) {
           return false;
         }
-        if(_filters['isLactoseFree'] && !meal.isLactoseFree){
+        if (_filters['isLactoseFree'] && !meal.isLactoseFree) {
           return false;
         }
         return true;
@@ -67,11 +87,13 @@ class _MyAppState extends State<MyApp> {
         canvasColor: Colors.yellow[50].withOpacity(0.8),
       ),
       routes: {
-        MyHomePage.route: (context) => MyHomePage(title: "Modern Meal App"),
+        MyHomePage.route: (context) => MyHomePage(
+            title: "Modern Meal App", favouriteMeal: _favouriteMeals),
         CategoriesScreen.route: (context) => CategoriesScreen(),
         CategoryMealsScreen.route: (context) =>
             CategoryMealsScreen(availableMeals: availableMeals),
-        MealDetailScreen.route: (context) => MealDetailScreen(),
+        MealDetailScreen.route: (context) =>
+            MealDetailScreen(toggleFilter: toggleFilter, isFavourite: isFavourite),
         FiltersScreen.route: (context) => FiltersScreen(
               saveFilterFunction: _saveFilters,
               filters: _filters,
